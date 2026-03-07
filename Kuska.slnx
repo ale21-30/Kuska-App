@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Kuska.Core/Kuska.Core.csproj" />
+    <Project Path="src/Kuska.Data/Kuska.Data.csproj" />
+    <Project Path="src/Kuska.Services/Kuska.Services.csproj" />
+    <Project Path="src/Kuska.Web/Kuska.Web.csproj" />
+  </Folder>
+</Solution>
