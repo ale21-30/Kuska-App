@@ -2,7 +2,7 @@
 ### *Juntas hacia el futuro · Ecuador*
 
 > Plataforma fintech + mentorías tech para niñas y adolescentes vulnerables en Ecuador.  
-> Conecta fondos comunitarios escolares con mentorías en vivo, protegiendo los datos de las menores desde el diseño.
+> Conecta apadrinamiento directo de útiles escolares, mentorías tech en vivo supervisadas y fondos comunitarios — protegiendo los datos de las menores desde el diseño.
 
 ---
 
@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| **Categorías** | Best Fintech Solution for Women's Economic Empowerment · Best Financial Inclusion Solution for Women |
-| **Equipo** | Hacker |
+| **Categorías** | Best Fintech Solution for Women's Economic Empowerment · Best Financial Inclusion Solution for Women (Sezzle) |
 | **País** | 🇪🇨 Ecuador |
 | **Stack** | ASP.NET Core 10 MVC · SQL Server · Entity Framework Core · Daily.co API |
+| **Repo** | https://github.com/ale21-30/Kuska-App |
 
 ---
 
@@ -30,136 +30,99 @@ En Ecuador, miles de niñas de escuelas públicas abandonan sus estudios cada a�
 Kuska conecta tres actores que hoy operan por separado:
 
 ```
-Empresas RSE + Cooperación Internacional
+Empresas RSE + Donantes individuales
               ↓
-    Fondos comunitarios escolares
+    Apadrinamiento directo a la niña
+    (útiles + uniforme con precio real)
               ↓
   Niñas y adolescentes beneficiarias
               +
     Mentorías tech en vivo seguras
 ```
 
-### Módulos principales
+---
 
-#### 💰 Fondo Comunitario Escolar
+## 📱 Módulos del sistema
+
+### 💜 Apadrinar una niña — *el corazón de Kuska*
+- Galería de niñas con avatar cartoon, edad, área de interés e historia en 2 frases
+- La mamá/tutora carga la lista real de útiles y uniforme con precios
+- El donante elige a quién apoyar y qué ítems cubrir — **sin intermediarios ni escuelas**
+- Trazabilidad completa: cada ítem muestra quién lo apadrinó y cuándo
+- Protección de datos: donante solo ve nombre de pila y edad — nunca apellidos ni dirección
+- Cumplimiento total con **LOPDP Ecuador 2021**
+
+### 💰 Fondo Comunitario Escolar
 - Fondos grupales por escuela con meta, progreso y trazabilidad completa
-- Fuentes de financiamiento: RSE corporativa, cooperación internacional, aportes de madres
-- Cada centavo es rastreable — log inmutable de todas las transacciones
-- Panel exclusivo para empresas patrocinadores con métricas agregadas y certificado RSE descargable
+- Fuentes: RSE corporativa, cooperación internacional, aportes personales
+- Historial inmutable de aportes con log de auditoría
+- Barra de progreso en tiempo real
 
-#### 👩‍💻 Mentorías Tech
-- Catálogo de mentoras verificadas (programación, diseño UX, data science, IA, ciberseguridad)
+### 👩‍💻 Mentorías Tech
+- Catálogo de mentoras verificadas: programación, diseño UX, data science, IA, ciberseguridad
 - Verificación con cédula antes de poder ofrecer sesiones — sin registro libre
-- Sistema de agenda con selección de niña, fecha y tema
+- Agenda con selección de niña, fecha y tema
 - Rating y evaluación post-sesión
 
-#### 🎥 Sala Supervisada
-- Videollamada con Daily.co API — máximo 3 participantes (niña, mentora, supervisora)
-- La sesión se pausa automáticamente si el tutor se desconecta
-- Link único con expiración — no reutilizable
-- Duración máxima: 60 minutos
-- Botón de reporte 🚨 que cierra la sala de inmediato y genera alerta
+### 🎥 Sala Supervisada
+- Videollamada con Daily.co API — máximo 3 participantes
+- Indicador EN VIVO con punto rojo pulsante
+- Supervisora siempre presente — pausa automática si se desconecta
+- Link único `kuska.sala/{id}` con expiración — no reutilizable
+- Controles: 🎤 · 📷 · 💬 · 🚨 reporte inmediato · 📞 salir
+- Panel de privacidad: datos visibles vs ocultos + log de auditoría + LOPDP
+
+### 👧 Mi hija
+- La mamá registra a su hija: nombre de pila, edad, interés, historia
+- Agrega lista de útiles con precios reales
+- Historial de apadrinamientos recibidos
 
 ---
 
-## 🔐 Arquitectura de seguridad — *"Privacy by Design"*
+## 🔐 Seguridad — *"Privacy by Design"*
 
-> Cuando los usuarios son niñas vulnerables, la seguridad no es opcional.
+### RBAC — 4 roles
 
-### RBAC — 4 roles con permisos estrictos
-
-| Rol | Qué puede ver |
+| Rol | Acceso |
 |---|---|
-| **Madre/Tutora** | Solo los datos de su hija |
-| **Mentora verificada** | Nombre de pila + edad únicamente |
+| **Madre/Tutora** | Datos de su hija · Fondos · Mentorías · Apadrinar |
+| **Mentora verificada** | Nombre de pila + edad únicamente en sala |
 | **Empresa/Patrocinador** | Métricas agregadas — NUNCA datos individuales |
-| **Admin** | Dashboard completo + alertas de seguridad |
+| **Admin** | Dashboard completo + alertas |
 
-### Capas de protección implementadas
-
-- 🔑 **Verificación anti-grooming:** Las mentoras requieren validación manual con cédula antes de acceder
-- 👁️ **Sala supervisada:** Tutor obligatorio presente, pausa automática si se desconecta
-- 🔗 **Links únicos:** Cada sala tiene un link con expiración y no es reutilizable
-- 🗄️ **Cifrado de datos sensibles:** Campos críticos encriptados en SQL Server
-- 📋 **Log de auditoría inmutable:** Tabla con triggers — registro de toda acción (quién, qué, cuándo, desde dónde)
-- 🛡️ **Sin IDs reales en URLs:** Tokens con expiración corta, honeypot anti-bots
-- ⚖️ **Marco legal:** Cumplimiento total con **LOPDP Ecuador 2021** + Código de la Niñez y Adolescencia
+### Capas de protección
+- 🔑 Verificación anti-grooming con cédula para mentoras
+- 👁️ Sala supervisada con pausa automática
+- 🔗 Links únicos con expiración
+- 📋 Log de auditoría inmutable (SQL trigger + C#)
+- 🛡️ Datos mínimos: solo nombre de pila y edad para terceros
+- ⚖️ LOPDP Ecuador 2021 + Código de la Niñez y Adolescencia
 
 ---
 
-## 🏗️ Arquitectura técnica
-
-```
-kuska-app/
-└── src/
-    ├── Kuska.Core/          # Entidades y modelos de dominio
-    │   └── Entities/
-    │       ├── Usuario.cs   # Con RBAC
-    │       ├── Nina.cs      # Solo nombre de pila — sin datos sensibles
-    │       ├── Fondo.cs     # Fondo comunitario con trazabilidad
-    │       ├── Mentora.cs   # Con verificación de cédula
-    │       ├── Sesion.cs    # Sala supervisada
-    │       └── AuditoriaLog.cs  # Log inmutable
-    │
-    ├── Kuska.Data/          # Acceso a datos
-    │   ├── KuskaDbContext.cs    # EF Core + configuración de relaciones
-    │   └── AuditoriaService.cs  # Registro automático de acciones
-    │
-    ├── Kuska.Services/      # Lógica de negocio
-    │
-    └── Kuska.Web/           # ASP.NET Core MVC
-        ├── Controllers/
-        │   ├── AuthController.cs       # Login + Registro por roles
-        │   ├── FondosController.cs     # Módulo financiero
-        │   ├── MentoriasController.cs  # Agenda + evaluación
-        │   └── SesionesController.cs   # Sala supervisada + Daily.co
-        └── Views/
-            ├── Auth/       # Login · Registro
-            ├── Fondos/     # Lista · Detalle · Crear
-            ├── Mentorias/  # Catálogo · Agendar · Mis sesiones
-            └── Sesiones/   # Sala supervisada
-```
-
-### Stack tecnológico
+## 🏗️ Stack técnico
 
 | Capa | Tecnología |
 |---|---|
 | Backend | ASP.NET Core 10 MVC (C#) |
 | Base de datos | SQL Server + Entity Framework Core 10 |
-| Frontend | HTML5 · CSS3 · Bootstrap-free (CSS custom) |
-| Tipografía | Cormorant Garamond (Canela-style) + Nunito |
-| Video | Daily.co API (salas con expiración y max_participants: 3) |
-| Autenticación | Session-based + SHA256 password hashing |
-| Auditoría | SQL Triggers + AuditoriaService (C#) |
-| Demo | localhost + ngrok |
+| Frontend | HTML5 · CSS3 custom · sin dependencias externas |
+| Tipografía | Cormorant Garamond + Nunito |
+| Video | Daily.co API |
+| Auth | Session-based + SHA256 |
 
 ---
 
-## 🚀 Instalación y ejecución local
-
-### Prerrequisitos
-- .NET 10 SDK
-- SQL Server (cualquier edición)
-- Git
-
-### Pasos
+## 🚀 Instalación local
 
 ```bash
-# 1. Clonar el repositorio
-git clone https://github.com/TU_USUARIO/kuska-app.git
-cd kuska-app
-
-# 2. Crear la base de datos
-# Abrir SQL Server Management Studio y ejecutar:
-# /scripts/KuskaDB_Create.sql
-
-# 3. Configurar la conexión
-# Editar src/Kuska.Web/appsettings.json:
-# "KuskaDB": "Server=.;Database=KuskaDB;Trusted_Connection=True;TrustServerCertificate=True;"
-
-# 4. Ejecutar la aplicación
+git clone https://github.com/ale21-30/Kuska-App.git
+cd Kuska-App
+# Ejecutar script SQL en SSMS
+# Editar appsettings.json con connection string
 cd src/Kuska.Web
 dotnet run
+# → http://localhost:5036
 ```
 
 ### Usuarios de prueba
@@ -172,30 +135,14 @@ dotnet run
 
 ---
 
-## 💼 Modelo de financiamiento
-
-Kuska no reinventa el dinero — canaliza recursos que ya existen pero no tienen infraestructura digital:
-
-| Fuente | Descripción |
-|---|---|
-| **RSE Corporativa** | Banco Pichincha, Corporación Favorita, Grupo Nobis — fondo base garantizado |
-| **Cooperación Internacional** | UNICEF, BID, CAF, Plan Internacional — casos de mayor vulnerabilidad |
-| **Aportes comunitarios** | Madres de familia — multiplicador opcional |
-| **Estado (Q2 2026)** | Integración futura con Ministerio de Educación Ecuador |
-
-> **Pitch frame:** Kuska es el canal de distribución transparente y trazable para programas RSE y cooperación que ya existen pero no tienen infraestructura digital.
-
----
-
-## 📊 Impacto proyectado — Ciclo 2026
+## 📊 Impacto proyectado 2026
 
 | Métrica | Meta |
 |---|---|
 | Niñas beneficiadas | 500 |
 | Mentoras verificadas | 50 |
-| Sesiones de mentoría | 500+ |
+| Útiles apadrinados | 2,000+ ítems |
 | Fondos distribuidos | $30,000 |
-| Provincias cubiertas | 15 |
 | Empresas RSE | 20+ |
 
 ---
@@ -204,17 +151,13 @@ Kuska no reinventa el dinero — canaliza recursos que ya existen pero no tienen
 
 | Fase | Timeline | Hitos |
 |---|---|---|
-| **MVP** ✅ | Mar 2026 | Fondos + Mentorías + Sala supervisada + LOPDP |
-| **V1.0** | May 2026 | Integración Ministerio Educación · App móvil |
-| **V2.0** | Sep 2026 | 15 provincias · IA para matching mentora-niña |
-| **V3.0** | 2027 | Expansión regional · Perú · Colombia |
+| **MVP** ✅ | Mar 2026 | Apadrinamiento · Mentorías · Sala supervisada · LOPDP |
+| **V1.0** | May 2026 | App móvil · Integración Ministerio Educación |
+| **V2.0** | Sep 2026 | 15 provincias · IA para matching |
+| **V3.0** | 2027 | Expansión: Perú · Colombia |
 
 ---
 
-## 👩‍💻 Sobre el nombre
-
-**Kuska** significa *"juntas"* en quechua — el idioma de los pueblos originarios de Ecuador y gran parte de Sudamérica. Elegimos este nombre porque refleja exactamente lo que hacemos: juntar a niñas, mentoras, familias y empresas para construir el futuro que todas merecen.
-
----
+**Kuska** significa *"juntas"* en quechua — el idioma de los pueblos originarios de Ecuador.
 
 *Kuska · SheShips 2026 · Ecuador 🇪🇨*
