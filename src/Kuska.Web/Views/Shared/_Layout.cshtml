@@ -26,6 +26,7 @@
                     <a asp-controller="Mentorias" asp-action="Index" class="nav-tab">📅 Mentorías</a>
                     <a asp-controller="Mentorias" asp-action="MisSesiones" class="nav-tab">🎥 Mis Sesiones</a>
                     <a asp-controller="Ninas" asp-action="Crear" class="nav-tab">👧 Mi hija</a>
+                    <a asp-controller="Apadrinamientos" asp-action="Index" class="nav-tab">💜 Apadrinar</a>
                     @if (Context.Session.GetString("Rol") == "Admin")
                     {
                         <a asp-controller="Dashboard" asp-action="Index" class="nav-tab">📊 Dashboard</a>

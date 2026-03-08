@@ -1,4 +1,5 @@
 ﻿using static System.Collections.Specialized.BitVector32;
+using Kuska.Core.Entities;
 
 namespace Kuska.Core.Entities;
 
@@ -11,6 +12,10 @@ public class Nina
     public string? AreaInteres { get; set; }
     public bool Activa { get; set; } = true;
     public DateTime FechaRegistro { get; set; } = DateTime.Now;
+
+    public string? Historia { get; set; }
+    public ICollection<ListaUtil> ListaUtiles { get; set; } = new List<ListaUtil>();
+    public ICollection<Apadrinamiento> Apadrinamientos { get; set; } = new List<Apadrinamiento>();
 
     // Navegación
     public Usuario Madre { get; set; } = null!;

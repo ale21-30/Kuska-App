@@ -5,6 +5,9 @@ namespace Kuska.Data;
 
 public class KuskaDbContext : DbContext
 {
+
+    public DbSet<ListaUtil> ListaUtiles { get; set; }
+    public DbSet<Apadrinamiento> Apadrinamientos { get; set; }
     public KuskaDbContext(DbContextOptions<KuskaDbContext> options) : base(options) { }
 
     public DbSet<Rol> Roles { get; set; }
@@ -133,5 +136,24 @@ public class KuskaDbContext : DbContext
             new Rol { RolId = 3, Nombre = "Mentora", Descripcion = "Profesional verificada que ofrece mentorías" },
             new Rol { RolId = 4, Nombre = "Empresa", Descripcion = "Empresa patrocinadora RSE" }
         );
+
+        modelBuilder.Entity<ListaUtil>().HasKey(x => x.ItemId);
+        modelBuilder.Entity<ListaUtil>().ToTable("ListaUtiles");
+        modelBuilder.Entity<ListaUtil>()
+            .HasOne(x => x.Nina).WithMany(n => n.ListaUtiles)
+            .HasForeignKey(x => x.NinaId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<ListaUtil>()
+            .HasOne(x => x.Apadrinador).WithMany()
+            .HasForeignKey(x => x.ApadrinadoPor).OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<Apadrinamiento>().HasKey(x => x.ApadrinamientoId);
+        modelBuilder.Entity<Apadrinamiento>().ToTable("Apadrinamientos");
+        modelBuilder.Entity<Apadrinamiento>()
+            .HasOne(x => x.Nina).WithMany(n => n.Apadrinamientos)
+            .HasForeignKey(x => x.NinaId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Apadrinamiento>()
+            .HasOne(x => x.Empresa).WithMany()
+            .HasForeignKey(x => x.EmpresaId).OnDelete(DeleteBehavior.NoAction);
+
     }
 }

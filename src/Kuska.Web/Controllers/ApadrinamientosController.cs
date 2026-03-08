@@ -65,7 +65,8 @@ public class ApadrinamientosController : Controller
                 NinaId = ninaId,
                 EmpresaId = usuarioId.Value,
                 MontoTotal = total,
-                Estado = "Activo"
+                Estado = "Activo",
+                FechaInicio = DateTime.Now
             };
             _context.Set<Apadrinamiento>().Add(apadrinamiento);
         }
