@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Agendar Sesión";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mentora = ViewBag.Mentora as Kuska.Core.Entities.Mentora;
+    var ninas = ViewBag.Ninas as IEnumerable<Kuska.Core.Entities.Nina>;
+}
+
+<div style="max-width:600px;margin:0 auto">
+    <div style="margin-bottom:1.8rem">
+        <div class="section-label">Módulo de Mentorías</div>
+        <div class="section-title">Solicitar una <em>sesión</em></div>
+        <div class="section-sub">Con @mentora?.Usuario.Nombre · @mentora?.Especialidad</div>
+    </div>
+
+    <div class="card" style="margin-bottom:1.2rem;background:linear-gradient(135deg,#F3EEFF,#FDFCFF);border-color:#D4B8F0">
+        <div style="display:flex;align-items:center;gap:0.8rem">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1rem">
+                @(mentora?.Usuario.Nombre.Substring(0, 2).ToUpper())
+            </div>
+            <div>
+                <div style="font-weight:700">@mentora?.Usuario.Nombre</div>
+                <div style="font-size:0.78rem;color:var(--ink-soft)">@mentora?.Especialidad · @mentora?.Ciudad</div>
+                <div style="font-size:0.75rem;color:var(--green);margin-top:0.2rem">⭐ @mentora?.Rating.ToString("F1") · @mentora?.TotalSesiones sesiones · ✓ Verificada</div>
+            </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.8rem">
+            @foreach (var h in mentora?.Habilidades ?? new List<Kuska.Core.Entities.MentoraHabilidad>())
+            {
+                <span style="padding:0.18rem 0.55rem;background:var(--purple-pale);border:1px solid #C4B5FD;border-radius:99px;font-size:0.68rem;color:var(--purple);font-weight:600">@h.Habilidad</span>
+            }
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title" style="margin-bottom:1rem">Datos de la sesión</div>
+
+        <form method="post" asp-action="Agendar" asp-route-mentoraId="@mentora?.MentoraId">
+            <div class="form-group">
+                <label class="form-label">¿Para cuál de tus hijas es la sesión?</label>
+                <select class="form-control" name="ninaId" required>
+                    <option value="">Selecciona...</option>
+                    @foreach (var nina in ninas ?? new List<Kuska.Core.Entities.Nina>())
+                    {
+                        <option value="@nina.NinaId">@nina.NombrePila · @nina.Edad años</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">¿Cuándo te queda bien?</label>
+                <input class="form-control" type="datetime-local" name="fechaSesion" required
+                       min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm")" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Tema que quieren trabajar</label>
+                <input class="form-control" type="text" name="tema"
+                       placeholder="Ej: Introducción a Python, Diseño de mi primera app..." required />
+            </div>
+
+            <div class="info-box info-green" style="margin-bottom:1rem">
+                🛡️ <strong>Tu hija está protegida:</strong> la mentora solo verá su nombre de pila y edad. La sesión requiere que estés presente en todo momento como supervisora.
+            </div>
+
+            <div style="display:flex;gap:0.7rem">
+                <a asp-action="Index" class="btn btn-outline" style="flex:1;justify-content:center">← Volver</a>
+                <button type="submit" class="btn btn-primary" style="flex:2;justify-content:center;padding:0.6rem">
+                    Enviar solicitud ✨
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
