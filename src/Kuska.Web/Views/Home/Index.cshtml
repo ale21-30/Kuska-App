@@ -1,8 +1,47 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div style="text-align:center;padding:4rem 2rem">
+    <div class="section-label">Plataforma de impacto social · Ecuador</div>
+    <h1 class="section-title" style="font-size:3rem;margin-bottom:1rem">
+        Juntas hacia el <em>futuro</em>
+    </h1>
+    <p style="color:var(--ink-soft);font-size:1rem;max-width:520px;margin:0 auto 2.5rem">
+        Kuska conecta a niñas y adolescentes vulnerables con mentoras tech, fondos comunitarios y empresas con propósito — para que ninguna se quede sin oportunidades.
+    </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a asp-controller="Auth" asp-action="Login" class="btn btn-primary" style="padding:0.7rem 1.8rem;font-size:0.9rem">
+            Ingresar a Kuska →
+        </a>
+        <a asp-controller="Auth" asp-action="Registro" class="btn btn-outline" style="padding:0.7rem 1.8rem;font-size:0.9rem">
+            Crear mi cuenta
+        </a>
+    </div>
 </div>
+
+<div class="grid-3" style="margin-top:2rem">
+    <div class="card" style="text-align:center">
+        <div style="font-size:2rem;margin-bottom:0.8rem">💰</div>
+        <div class="card-title">Fondos comunitarios</div>
+        <div class="card-sub">Empresas y organizaciones aportan para cubrir útiles y uniformes escolares con total trazabilidad.</div>
+    </div>
+    <div class="card" style="text-align:center">
+        <div style="font-size:2rem;margin-bottom:0.8rem">👩‍💻</div>
+        <div class="card-title">Mentorías tech</div>
+        <div class="card-sub">Mujeres profesionales verificadas ofrecen sesiones en programación, diseño, IA y más.</div>
+    </div>
+    <div class="card" style="text-align:center">
+        <div style="font-size:2rem;margin-bottom:0.8rem">🔒</div>
+        <div class="card-title">Seguridad por diseño</div>
+        <div class="card-sub">Salas supervisadas, datos de menores protegidos y cumplimiento total con la LOPDP Ecuador.</div>
+    </div>
+</div>
+```
+
+---
+
+Guarda, el navegador se actualiza solo. Ve a:
+```
+http://localhost:5036
