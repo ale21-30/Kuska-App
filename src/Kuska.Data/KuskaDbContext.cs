@@ -22,6 +22,30 @@ public class KuskaDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // ---- PRIMARY KEYS EXPLÍCITAS ----
+        modelBuilder.Entity<Rol>().HasKey(r => r.RolId);
+        modelBuilder.Entity<Usuario>().HasKey(u => u.UsuarioId);
+        modelBuilder.Entity<Nina>().HasKey(n => n.NinaId);
+        modelBuilder.Entity<Fondo>().HasKey(f => f.FondoId);
+        modelBuilder.Entity<AporteFondo>().HasKey(a => a.AporteId);
+        modelBuilder.Entity<Mentora>().HasKey(m => m.MentoraId);
+        modelBuilder.Entity<MentoraHabilidad>().HasKey(m => m.HabilidadId);
+        modelBuilder.Entity<Sesion>().HasKey(s => s.SesionId);
+        modelBuilder.Entity<AuditoriaLog>().HasKey(a => a.LogId);
+        modelBuilder.Entity<Reporte>().HasKey(r => r.ReporteId);
+
+        // ---- NOMBRES DE TABLAS EXACTOS ----
+        modelBuilder.Entity<Rol>().ToTable("Roles");
+        modelBuilder.Entity<Usuario>().ToTable("Usuarios");
+        modelBuilder.Entity<Nina>().ToTable("Ninas");
+        modelBuilder.Entity<Fondo>().ToTable("Fondos");
+        modelBuilder.Entity<AporteFondo>().ToTable("AportesFondo");
+        modelBuilder.Entity<Mentora>().ToTable("Mentoras");
+        modelBuilder.Entity<MentoraHabilidad>().ToTable("MentoraHabilidades");
+        modelBuilder.Entity<Sesion>().ToTable("Sesiones");
+        modelBuilder.Entity<AuditoriaLog>().ToTable("AuditoriaLog");
+        modelBuilder.Entity<Reporte>().ToTable("Reportes");
+
         // ---- USUARIO ----
         modelBuilder.Entity<Usuario>(e => {
             e.HasIndex(u => u.Email).IsUnique();
@@ -32,7 +56,6 @@ public class KuskaDbContext : DbContext
         });
 
         // ---- NINA ----
-        // Solo nombre de pila — sin datos sensibles
         modelBuilder.Entity<Nina>(e => {
             e.Property(n => n.NombrePila).HasMaxLength(50);
             e.HasOne(n => n.Madre)
@@ -103,7 +126,7 @@ public class KuskaDbContext : DbContext
              .OnDelete(DeleteBehavior.Restrict);
         });
 
-        // ---- SEED: ROLES INICIALES ----
+        // ---- SEED: ROLES ----
         modelBuilder.Entity<Rol>().HasData(
             new Rol { RolId = 1, Nombre = "Admin", Descripcion = "Administrador de la plataforma" },
             new Rol { RolId = 2, Nombre = "Madre", Descripcion = "Madre o tutora de una niña beneficiaria" },
