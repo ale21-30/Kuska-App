@@ -1,31 +1,413 @@
-html {
-  font-size: 14px;
+:root {
+    --cream: #FAF7F2;
+    --cream-mid: #F2EDE4;
+    --cream-dark: #E8E0D2;
+    --purple: #3B0764;
+    --purple-mid: #5B1A8A;
+    --purple-soft: #7B2FA8;
+    --purple-pale: #EDE9FE;
+    --lilac: #C4B5FD;
+    --ink: #1C1A18;
+    --ink-mid: #4A4540;
+    --ink-soft: #7A736A;
+    --green: #15803D;
+    --green-pale: #DCFCE7;
+    --amber: #B45309;
+    --amber-pale: #FEF3C7;
+    --red: #B91C1C;
+    --red-pale: #FEE2E2;
+    --border: #DDD6C8;
+    --shadow: 0 2px 12px rgba(59,7,100,0.08);
+    --shadow-md: 0 4px 24px rgba(28,26,24,0.12);
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* ---- NAV ---- */
+.nav {
+    background: var(--cream);
+    border-bottom: 1.5px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1.2rem 2.5rem 0;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.nav-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 0.8rem;
+    position: relative;
 }
+
+.logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--purple);
+    text-decoration: none;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.logo-tagline {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 700;
+    margin-top: 0.2rem;
+}
+
+.nav-secure {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: var(--green);
+    font-weight: 600;
+    background: var(--green-pale);
+    border: 1px solid #86EFAC;
+    border-radius: 99px;
+    padding: 0.28rem 0.75rem;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 0.2rem;
+    background: var(--cream-mid);
+    border: 1.5px solid var(--border);
+    padding: 0.3rem 0.3rem 0;
+    border-bottom: none;
+}
+
+.nav-tab {
+    padding: 0.5rem 1rem;
+    border-radius: 8px 8px 0 0;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .nav-tab:hover, .nav-tab.active {
+        background: var(--purple);
+        color: white;
+    }
+
+/* ---- MAIN ---- */
+.main-content {
+    padding: 2rem 2.5rem;
+}
+
+/* ---- CARDS ---- */
+.card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.4rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+    .card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-1px);
+    }
+
+.card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+}
+
+.card-sub {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+}
+
+/* ---- GRIDS ---- */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.4rem;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+}
+
+/* ---- STATS ---- */
+.stat-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.4rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--purple);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    margin-top: 0.3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* ---- BUTTONS ---- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--purple);
+    color: white;
+    border: 1.5px solid var(--purple);
+}
+
+    .btn-primary:hover {
+        background: var(--purple-mid);
+        color: white;
+    }
+
+.btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+}
+
+    .btn-outline:hover {
+        background: var(--cream-mid);
+    }
+
+.btn-danger {
+    background: var(--red);
+    color: white;
+    border: 1.5px solid var(--red);
+}
+
+/* ---- BADGES ---- */
+.badge {
+    display: inline-block;
+    padding: 0.18rem 0.6rem;
+    border-radius: 99px;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.badge-purple {
+    background: var(--purple-pale);
+    color: var(--purple);
+}
+
+.badge-green {
+    background: var(--green-pale);
+    color: var(--green);
+}
+
+.badge-amber {
+    background: var(--amber-pale);
+    color: var(--amber);
+}
+
+.badge-red {
+    background: var(--red-pale);
+    color: var(--red);
+}
+
+/* ---- PROGRESS ---- */
+.progress-bar {
+    height: 6px;
+    background: var(--cream-dark);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-top: 0.3rem;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: var(--purple);
+}
+
+    .progress-fill.green {
+        background: linear-gradient(90deg, #16A34A, #22C55E);
+    }
+
+    .progress-fill.amber {
+        background: linear-gradient(90deg, var(--amber), #F59E0B);
+    }
+
+/* ---- FORMS ---- */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    font-size: 0.76rem;
+    color: var(--ink-mid);
+    margin-bottom: 0.32rem;
+    display: block;
+    font-weight: 700;
+}
+
+.form-control {
+    width: 100%;
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    padding: 0.55rem 0.9rem;
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.84rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+    .form-control:focus {
+        border-color: var(--purple);
+        background: white;
+    }
+
+/* ---- SECTION HEADER ---- */
+.section-label {
+    font-size: 0.68rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+}
+
+    .section-title em {
+        font-style: italic;
+        color: var(--purple);
+    }
+
+.section-sub {
+    margin-top: 0.4rem;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    margin-bottom: 1.8rem;
+}
+
+/* ---- INFO BOXES ---- */
+.info-box {
+    border-radius: 11px;
+    padding: 0.75rem 1rem;
+    font-size: 0.77rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.info-green {
+    background: var(--green-pale);
+    color: var(--green);
+    border: 1px solid #86EFAC;
+}
+
+.info-red {
+    background: var(--red-pale);
+    color: var(--red);
+    border: 1px solid #FCA5A5;
+}
+
+.info-purple {
+    background: var(--purple-pale);
+    color: var(--purple);
+    border: 1px solid var(--lilac);
+}
+
+/* ---- MISC ---- */
+.divider {
+    border: none;
+    border-top: 1.5px solid var(--cream-dark);
+    margin: 1rem 0;
+}
+
+.row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+}
+
+.watermark {
+    position: fixed;
+    bottom: 0.8rem;
+    right: 1.5rem;
+    font-size: 0.65rem;
+    color: var(--lilac);
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 1px;
+    pointer-events: none;
+}
+
+/* ---- LOGIN ---- */
+.login-wrap {
+    max-width: 420px;
+    margin: 4rem auto;
+}
+
+    .login-wrap .card {
+        padding: 2rem;
+    }

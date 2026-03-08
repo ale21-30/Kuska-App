@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Crear cuenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="login-wrap" style="max-width:480px">
+    <div class="card">
+        <div style="text-align:center;margin-bottom:1.5rem">
+            <div class="section-label">Únete a la comunidad</div>
+            <div class="section-title">Crear cuenta en <em>Kuska</em></div>
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="info-box info-red">⚠️ @ViewBag.Error</div>
+        }
+
+        <form method="post">
+            <div class="form-group">
+                <label class="form-label">Nombre completo</label>
+                <input class="form-control" type="text" name="nombre" placeholder="Tu nombre" required />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Correo electrónico</label>
+                <input class="form-control" type="email" name="email" placeholder="tu@correo.com" required />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contraseña</label>
+                <input class="form-control" type="password" name="password" placeholder="Mínimo 8 caracteres" required />
+            </div>
+            <div class="form-group">
+                <label class="form-label">¿Cuál es tu rol?</label>
+                <select class="form-control" name="rolId" required>
+                    <option value="">Selecciona...</option>
+                    @foreach (var rol in ViewBag.Roles)
+                    {
+                        <option value="@rol.RolId">@rol.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Cédula (solo mentoras)</label>
+                <input class="form-control" type="text" name="cedula" placeholder="Número de cédula" />
+            </div>
+            <div class="info-box info-purple">
+                🛡️ Si eres <strong>mentora</strong>, tu cédula será verificada por el equipo de Kuska antes de poder ofrecer sesiones.
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.6rem">
+                Crear mi cuenta ✨
+            </button>
+        </form>
+
+        <div style="text-align:center;margin-top:1rem;font-size:0.82rem;color:var(--ink-soft)">
+            ¿Ya tienes cuenta?
+            <a asp-controller="Auth" asp-action="Login" style="color:var(--purple);font-weight:700">Ingresa aquí</a>
+        </div>
+    </div>
+</div>

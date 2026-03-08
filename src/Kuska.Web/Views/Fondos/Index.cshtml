@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Kuska.Core.Entities.Fondo>
+@{
+    ViewData["Title"] = "Fondos Comunitarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row-between" style="margin-bottom:1.8rem">
+    <div>
+        <div class="section-label">Módulo de Financiamiento</div>
+        <div class="section-title">Fondo <em>comunitario</em> escolar</div>
+        <div class="section-sub">Juntamos recursos para que ninguna niña se quede sin útiles 💜</div>
+    </div>
+    <div style="display:flex;gap:0.5rem">
+        <a asp-action="Crear" class="btn btn-outline">+ Crear fondo</a>
+        <a asp-action="Crear" class="btn btn-primary">Unirme a un fondo</a>
+    </div>
+</div>
+
+<div class="grid-3" style="margin-bottom:1.5rem">
+    <div class="stat-card">
+        <div style="font-size:1.4rem;margin-bottom:0.4rem">👧</div>
+        <div class="stat-number">@Model.Sum(f => f.Aportes.Count)</div>
+        <div class="stat-label">Aportes realizados</div>
+    </div>
+    <div class="stat-card">
+        <div style="font-size:1.4rem;margin-bottom:0.4rem">💵</div>
+        <div class="stat-number">$@Model.Sum(f => f.MontoActual).ToString("N0")</div>
+        <div class="stat-label">Fondos acumulados</div>
+    </div>
+    <div class="stat-card">
+        <div style="font-size:1.4rem;margin-bottom:0.4rem">🏫</div>
+        <div class="stat-number">@Model.Count()</div>
+        <div class="stat-label">Fondos activos</div>
+    </div>
+</div>
+
+<div class="grid-2">
+    @foreach (var fondo in Model)
+    {
+        <div class="card">
+            <div class="row-between" style="margin-bottom:0.8rem">
+                <div>
+                    <div class="card-title">@fondo.Nombre</div>
+                    <div class="card-sub">@fondo.Escuela · @fondo.Ciudad</div>
+                </div>
+                <span class="badge @(fondo.Estado == "Activo" ? "badge-green" : "badge-amber")">
+                    @fondo.Estado
+                </span>
+            </div>
+
+            <div style="margin-bottom:0.4rem;display:flex;justify-content:space-between;font-size:0.76rem;color:var(--ink-soft);font-weight:600">
+                <span>Meta: $@fondo.MetaMonto.ToString("N0")</span>
+                <span style="color:var(--green)">$@fondo.MontoActual.ToString("N0") · @fondo.PorcentajeAvance%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill green" style="width:@fondo.PorcentajeAvance%"></div>
+            </div>
+
+            <div style="margin-top:1rem;display:flex;gap:0.5rem">
+                <a asp-action="Detalle" asp-route-id="@fondo.FondoId" class="btn btn-outline" style="flex:1;justify-content:center">Ver detalle</a>
+                <form method="post" asp-action="Aportar" style="flex:1">
+                    <input type="hidden" name="fondoId" value="@fondo.FondoId" />
+                    <input type="hidden" name="fuente" value="Madre" />
+                    <input type="number" name="monto" class="form-control" placeholder="$Monto" step="0.01" min="1" style="margin-bottom:0.4rem" />
+                    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Aportar</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

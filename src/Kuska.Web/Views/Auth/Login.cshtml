@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Ingresar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="login-wrap">
+    <div class="card">
+        <div style="text-align:center;margin-bottom:1.5rem">
+            <div class="section-label">Bienvenida de vuelta</div>
+            <div class="section-title">Ingresa a <em>Kuska</em></div>
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="info-box info-red">⚠️ @ViewBag.Error</div>
+        }
+
+        <form method="post">
+            <div class="form-group">
+                <label class="form-label">Correo electrónico</label>
+                <input class="form-control" type="email" name="email" placeholder="tu@correo.com" required />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contraseña</label>
+                <input class="form-control" type="password" name="password" placeholder="••••••••" required />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.6rem">
+                Ingresar →
+            </button>
+        </form>
+
+        <div style="text-align:center;margin-top:1rem;font-size:0.82rem;color:var(--ink-soft)">
+            ¿No tienes cuenta?
+            <a asp-controller="Auth" asp-action="Registro" style="color:var(--purple);font-weight:700">Regístrate aquí</a>
+        </div>
+    </div>
+</div>
