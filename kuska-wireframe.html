@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuska — Wireframe · SheShips 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#3B0764;--purple-mid:#6D28D9;--purple-pale:#F3EEFF;--cream:#FAF7F2;--cream-dark:#EDE8E0;--green:#16A34A;--green-pale:#F0FDF4;--amber:#D97706;--red:#DC2626;--ink:#1C1917;--ink-mid:#44403C;--ink-soft:#78716C;--border:#E7E2D8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink)}
+.nav{background:white;border-bottom:1px solid var(--border);padding:0 2rem;display:flex;flex-direction:column;align-items:center}
+.nav-top{width:100%;display:flex;justify-content:space-between;align-items:center;padding:1rem 0 0.3rem}
+.logo{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--purple)}
+.tagline{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft)}
+.nav-badge{background:var(--green-pale);border:1px solid #86EFAC;color:var(--green);font-size:0.7rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:99px}
+.nav-tabs{display:flex;gap:0;border-top:1px solid var(--border);width:100%}
+.nav-tab{padding:0.65rem 1rem;font-size:0.8rem;font-weight:600;color:var(--ink-mid);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none}
+.nav-tab:hover,.nav-tab.active{color:var(--purple);border-bottom-color:var(--purple)}
+.screen-selector{background:white;border-bottom:2px solid var(--purple-pale);padding:0.5rem 2rem;display:flex;gap:0.5rem;align-items:center;overflow-x:auto}
+.screen-btn{padding:0.3rem 0.8rem;border-radius:99px;font-size:0.72rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--ink-soft);white-space:nowrap}
+.screen-btn.active{background:var(--purple);color:white;border-color:var(--purple)}
+.screen{display:none;padding:2.5rem 2rem;max-width:1100px;margin:0 auto}
+.screen.active{display:block}
+.section-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:0.3rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--ink);line-height:1.1}
+.section-title em{font-style:italic;color:var(--purple)}
+.section-sub{font-size:0.85rem;color:var(--ink-soft);margin-top:0.4rem}
+.card{background:white;border:1px solid var(--border);border-radius:16px;padding:1.4rem}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--ink)}
+.card-sub{font-size:0.75rem;color:var(--ink-soft);margin-top:0.2rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem}
+.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem}
+.btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:8px;font-size:0.82rem;font-weight:700;cursor:pointer;text-decoration:none;border:none;font-family:'Nunito',sans-serif}
+.btn-primary{background:var(--purple);color:white}
+.btn-outline{background:white;color:var(--ink);border:1.5px solid var(--ink)}
+.badge{display:inline-flex;align-items:center;padding:0.18rem 0.6rem;border-radius:99px;font-size:0.68rem;font-weight:700}
+.badge-green{background:var(--green-pale);color:var(--green);border:1px solid #86EFAC}
+.badge-purple{background:var(--purple-pale);color:var(--purple);border:1px solid #C4B5FD}
+.badge-amber{background:#FFFBEB;color:var(--amber);border:1px solid #FCD34D}
+.badge-red{background:#FEF2F2;color:var(--red);border:1px solid #FCA5A5}
+.progress-bar{height:8px;background:var(--cream-dark);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;border-radius:99px}
+.pf-green{background:linear-gradient(90deg,#16A34A,#4ADE80)}
+.pf-amber{background:linear-gradient(90deg,#D97706,#FCD34D)}
+.pf-purple{background:linear-gradient(90deg,#3B0764,#7C3AED)}
+.stat-card{background:white;border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
+.stat-number{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:var(--purple)}
+.stat-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink-soft);font-weight:700;margin-top:0.2rem}
+.info-box{padding:0.65rem 0.9rem;border-radius:10px;font-size:0.78rem;line-height:1.5}
+.info-green{background:var(--green-pale);border:1px solid #86EFAC;color:#166534}
+.info-purple{background:var(--purple-pale);border:1px solid #C4B5FD;color:var(--purple)}
+.info-red{background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B}
+.row-between{display:flex;align-items:flex-start;justify-content:space-between}
+.skill-tag{padding:0.18rem 0.55rem;background:var(--purple-pale);border:1px solid #C4B5FD;border-radius:99px;font-size:0.68rem;color:var(--purple);font-weight:600}
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:0.78rem;font-weight:700;color:var(--ink-mid);margin-bottom:0.35rem}
+.form-control{width:100%;padding:0.5rem 0.8rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;font-family:'Nunito',sans-serif;background:white;color:var(--ink)}
+hr.divider{border:none;border-top:1px solid var(--cream-dark);margin:0.8rem 0}
+footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--ink-soft);border-top:1px solid var(--border);margin-top:3rem}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.pulse{animation:pulse 1s infinite}
+.sala-bg{background:#0F0520;border:2px solid #7B2FA8;border-radius:18px;overflow:hidden}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-top">
+    <div><div class="logo">Kuska</div><div class="tagline">Juntas hacia el futuro · Ecuador</div></div>
+    <div class="nav-badge">🔒 María Torres</div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="show('fondos',this)">💰 Fondos</button>
+    <button class="nav-tab" onclick="show('mentorias',this)">👩‍💻 Mentorías</button>
+    <button class="nav-tab" onclick="show('sesiones',this)">📅 Mis Sesiones</button>
+    <button class="nav-tab" onclick="show('apadrinar',this)">💜 Apadrinar</button>
+    <button class="nav-tab" onclick="show('nina',this)">👧 Mi hija</button>
+    <button class="nav-tab" onclick="show('sala',this)">🎥 Sala</button>
+    <button class="nav-tab" onclick="show('empresa',this)">🏢 Empresa</button>
+  </div>
+</nav>
+<div class="screen-selector">
+  <span style="font-size:0.7rem;color:var(--ink-soft);font-weight:700;margin-right:0.3rem">PANTALLAS:</span>
+  <button class="screen-btn active" onclick="show('fondos',this)">1. Fondos</button>
+  <button class="screen-btn" onclick="show('mentorias',this)">2. Mentorías</button>
+  <button class="screen-btn" onclick="show('sesiones',this)">3. Mis Sesiones</button>
+  <button class="screen-btn" onclick="show('agendar',this)">4. Agendar Sesión</button>
+  <button class="screen-btn" onclick="show('apadrinar',this)">5. Galería Apadrinamiento</button>
+  <button class="screen-btn" onclick="show('nina',this)">6. Perfil Niña</button>
+  <button class="screen-btn" onclick="show('sala',this)">7. Sala Supervisada</button>
+  <button class="screen-btn" onclick="show('empresa',this)">8. Panel Empresa</button>
+</div>
+
+<!-- FONDOS -->
+<div id="screen-fondos" class="screen active">
+  <div class="row-between" style="margin-bottom:1.8rem">
+    <div><div class="section-label">Módulo de Financiamiento</div><div class="section-title">Fondo <em>comunitario</em> escolar</div><div class="section-sub">Juntamos recursos para que ninguna niña se quede sin futuro 💜</div></div>
+    <div style="display:flex;gap:0.5rem"><button class="btn btn-outline">+ Crear fondo</button><button class="btn btn-primary">Unirme a un fondo</button></div>
+  </div>
+  <div class="grid-4" style="margin-bottom:2rem">
+    <div class="stat-card"><div style="font-size:1.8rem">🧒</div><div class="stat-number">7</div><div class="stat-label">Aportes realizados</div></div>
+    <div class="stat-card"><div style="font-size:1.8rem">💵</div><div class="stat-number">$665</div><div class="stat-label">Fondos acumulados</div></div>
+    <div class="stat-card"><div style="font-size:1.8rem">🏫</div><div class="stat-number">2</div><div class="stat-label">Fondos activos</div></div>
+    <div class="stat-card"><div style="font-size:1.8rem">✅</div><div class="stat-number">78%</div><div class="stat-label">Meta promedio</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="row-between" style="margin-bottom:0.8rem"><div><div class="card-title">Fondo Escolar 2026</div><div class="card-sub">U.E. 24 de Mayo · Quito</div></div><span class="badge badge-green">Activo</span></div>
+      <div style="font-size:0.75rem;color:var(--ink-soft);margin-bottom:0.4rem">Meta: $480 · Cierra 30 abr 2026</div>
+      <div class="progress-bar" style="margin-bottom:0.3rem"><div class="progress-fill pf-green" style="width:78%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--ink-soft);margin-bottom:1rem"><span>$377 acumulado</span><span style="color:var(--green);font-weight:700">78.5%</span></div>
+      <div style="display:flex;gap:0.5rem"><button class="btn btn-outline" style="flex:1;justify-content:center">Ver detalle</button><button class="btn btn-primary" style="flex:1;justify-content:center">Aportar</button></div>
+    </div>
+    <div class="card">
+      <div class="row-between" style="margin-bottom:0.8rem"><div><div class="card-title">Útiles para todas</div><div class="card-sub">Esc. Manuela Cañizares · Guayaquil</div></div><span class="badge badge-green">Activo</span></div>
+      <div style="font-size:0.75rem;color:var(--ink-soft);margin-bottom:0.4rem">Meta: $720 · Cierra 15 may 2026</div>
+      <div class="progress-bar" style="margin-bottom:0.3rem"><div class="progress-fill pf-amber" style="width:40%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--ink-soft);margin-bottom:1rem"><span>$288 acumulado</span><span style="color:var(--amber);font-weight:700">40.0%</span></div>
+      <div style="display:flex;gap:0.5rem"><button class="btn btn-outline" style="flex:1;justify-content:center">Ver detalle</button><button class="btn btn-primary" style="flex:1;justify-content:center">Aportar</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MENTORÍAS -->
+<div id="screen-mentorias" class="screen">
+  <div class="row-between" style="margin-bottom:1.8rem">
+    <div><div class="section-label">Módulo de Mentorías</div><div class="section-title">Encuentra tu <em>mentora</em></div><div class="section-sub">Mujeres profesionales que inspiran a las niñas del futuro 🌟</div></div>
+    <span class="badge badge-purple">🛡️ Todas verificadas con cédula</span>
+  </div>
+  <div class="grid-3">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem"><div style="width:44px;height:44px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;color:white;font-weight:800">MA</div><div><div style="font-weight:700">María Torres</div><div style="font-size:0.75rem;color:var(--ink-soft)">Ingeniería de Software · Quito</div></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.7rem"><span class="skill-tag">Programación</span><span class="skill-tag">Python</span><span class="skill-tag">Web Dev</span><span class="skill-tag">C#</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.78rem;color:var(--ink-soft)">⭐ 4.9 · 23 sesiones</span><button class="btn btn-primary" style="font-size:0.75rem;padding:0.3rem 0.7rem" onclick="show('agendar')">Solicitar sesión</button></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem"><div style="width:44px;height:44px;border-radius:50%;background:#7C3AED;display:flex;align-items:center;justify-content:center;color:white;font-weight:800">AN</div><div><div style="font-weight:700">Ana López</div><div style="font-size:0.75rem;color:var(--ink-soft)">Diseño UX/UI · Guayaquil</div></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.7rem"><span class="skill-tag">Diseño UX</span><span class="skill-tag">Figma</span><span class="skill-tag">Creatividad</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.78rem;color:var(--ink-soft)">⭐ 4.8 · 15 sesiones</span><button class="btn btn-primary" style="font-size:0.75rem;padding:0.3rem 0.7rem">Solicitar sesión</button></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem"><div style="width:44px;height:44px;border-radius:50%;background:#0F766E;display:flex;align-items:center;justify-content:center;color:white;font-weight:800">CA</div><div><div style="font-weight:700">Carla Vega</div><div style="font-size:0.75rem;color:var(--ink-soft)">Data Science / IA · Cuenca</div></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.7rem"><span class="skill-tag">Data Science</span><span class="skill-tag">IA</span><span class="skill-tag">Python</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.78rem;color:var(--ink-soft)">⭐ 5.0 · 9 sesiones</span><button class="btn btn-primary" style="font-size:0.75rem;padding:0.3rem 0.7rem">Solicitar sesión</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MIS SESIONES -->
+<div id="screen-sesiones" class="screen">
+  <div class="row-between" style="margin-bottom:1.8rem">
+    <div><div class="section-label">Módulo de Mentorías</div><div class="section-title">Mis <em>sesiones</em></div><div class="section-sub">Historial de mentorías agendadas y completadas 📅</div></div>
+    <button class="btn btn-outline">+ Agendar nueva</button>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:1rem">
+    <div class="card">
+      <div class="row-between">
+        <div style="display:flex;align-items:center;gap:0.9rem"><div style="width:44px;height:44px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;color:white;font-weight:800">MA</div><div><div style="font-weight:700">María Torres</div><div style="font-size:0.78rem;color:var(--ink-soft)">Ingeniería de Software · Para <strong>Sofía</strong></div><div style="font-size:0.75rem;color:var(--ink-soft)">📅 miér 11 mar 2026 · 21:09 · 60 min</div></div></div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem"><span class="badge badge-green">Confirmada</span><span style="font-size:0.72rem;color:var(--ink-soft)">📚 Python</span></div>
+      </div>
+      <hr class="divider">
+      <button class="btn btn-primary" style="font-size:0.8rem" onclick="show('sala')">🎥 Entrar a la sala</button>
+    </div>
+    <div class="card">
+      <div class="row-between">
+        <div style="display:flex;align-items:center;gap:0.9rem"><div style="width:44px;height:44px;border-radius:50%;background:#0F766E;display:flex;align-items:center;justify-content:center;color:white;font-weight:800">CA</div><div><div style="font-weight:700">Carla Vega</div><div style="font-size:0.78rem;color:var(--ink-soft)">Data Science / IA · Para <strong>Katy</strong></div><div style="font-size:0.75rem;color:var(--ink-soft)">📅 vier 20 mar 2026 · 01:44 · 60 min</div></div></div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem"><span class="badge badge-amber">Pendiente</span><span style="font-size:0.72rem;color:var(--ink-soft)">📚 Diseño</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AGENDAR -->
+<div id="screen-agendar" class="screen">
+  <div style="max-width:580px;margin:0 auto">
+    <div style="margin-bottom:1.8rem"><div class="section-label">Módulo de Mentorías</div><div class="section-title">Solicitar una <em>sesión</em></div><div class="section-sub">Con María Torres · Ingeniería de Software</div></div>
+    <div class="card" style="margin-bottom:1.2rem;background:linear-gradient(135deg,#F3EEFF,#FDFCFF);border-color:#D4B8F0">
+      <div style="display:flex;align-items:center;gap:0.8rem"><div style="width:48px;height:48px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;color:white;font-weight:800">MA</div><div><div style="font-weight:700">María Torres</div><div style="font-size:0.78rem;color:var(--ink-soft)">Ingeniería de Software · Quito</div><div style="font-size:0.75rem;color:var(--green)">⭐ 4.9 · 23 sesiones · ✓ Verificada</div></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.8rem"><span class="skill-tag">Programación</span><span class="skill-tag">Python</span><span class="skill-tag">Web Dev</span><span class="skill-tag">C#</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:1rem">Datos de la sesión</div>
+      <div class="form-group"><label class="form-label">¿Para cuál de tus hijas?</label><select class="form-control"><option>Sofía · 14 años</option><option>Valentina · 12 años</option></select></div>
+      <div class="form-group"><label class="form-label">¿Cuándo te queda bien?</label><input class="form-control" type="datetime-local"></div>
+      <div class="form-group"><label class="form-label">Tema a trabajar</label><input class="form-control" type="text" placeholder="Ej: Introducción a Python..."></div>
+      <div class="info-box info-green" style="margin-bottom:1rem">🛡️ <strong>Tu hija está protegida:</strong> la mentora solo verá su nombre de pila y edad.</div>
+      <div style="display:flex;gap:0.7rem"><button class="btn btn-outline" style="flex:1;justify-content:center" onclick="show('mentorias')">← Volver</button><button class="btn btn-primary" style="flex:2;justify-content:center;padding:0.6rem">Enviar solicitud ✨</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- APADRINAR -->
+<div id="screen-apadrinar" class="screen">
+  <div class="row-between" style="margin-bottom:1.8rem">
+    <div><div class="section-label">Programa de Apadrinamiento</div><div class="section-title">Cambia una <em>vida</em></div><div class="section-sub">Cada niña tiene una historia y una lista real de útiles — tú eliges a quién apoyar 💜</div></div>
+    <span class="badge badge-green">2 niñas esperando</span>
+  </div>
+  <div class="grid-4" style="margin-bottom:2rem">
+    <div class="stat-card"><div class="stat-number">2</div><div class="stat-label">Niñas registradas</div></div>
+    <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">Útiles apadrinados</div></div>
+    <div class="stat-card"><div class="stat-number">$14</div><div class="stat-label">Invertido</div></div>
+    <div class="stat-card"><div class="stat-number">11%</div><div class="stat-label">Cobertura</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="card" style="display:flex;flex-direction:column;gap:0.8rem">
+      <div style="text-align:center;padding:1rem 0 0.3rem"><div style="font-size:3.5rem">👧</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600">Sofía</div><div style="font-size:0.75rem;color:var(--ink-soft)">14 años · Programación</div></div>
+      <div style="font-size:0.82rem;color:var(--ink-mid);text-align:center;font-style:italic;padding:0 0.5rem;line-height:1.5">"Sofía sueña con ser programadora y crear apps para su comunidad."</div>
+      <div><div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--ink-soft);margin-bottom:0.3rem"><span>Lista de útiles</span><span style="color:var(--amber);font-weight:700">11% cubierto</span></div><div class="progress-bar"><div class="progress-fill pf-amber" style="width:11%"></div></div><div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--ink-soft);margin-top:0.3rem"><span>$14 cubierto</span><span>$116 total</span></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.25rem"><span style="font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:99px;background:var(--green-pale);color:var(--green);border:1px solid #86EFAC">✓ Lápices</span><span style="font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:99px;background:var(--cream);color:var(--ink-soft);border:1px solid var(--border)">○ Cuadernos</span><span style="font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:99px;background:var(--cream);color:var(--ink-soft);border:1px solid var(--border)">○ Mochila</span><span style="font-size:0.68rem;color:var(--ink-soft)">+3 más</span></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="show('nina')">Ver lista y apadrinar →</button>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;gap:0.8rem">
+      <div style="text-align:center;padding:1rem 0 0.3rem"><div style="font-size:3.5rem">🧒‍♀️</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600">Valentina</div><div style="font-size:0.75rem;color:var(--ink-soft)">12 años · Diseño UX</div></div>
+      <div style="font-size:0.82rem;color:var(--ink-mid);text-align:center;font-style:italic;padding:0 0.5rem;line-height:1.5">"Valentina quiere diseñar experiencias digitales que lleguen a todas las niñas del Ecuador."</div>
+      <div><div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--ink-soft);margin-bottom:0.3rem"><span>Lista de útiles</span><span style="color:var(--amber);font-weight:700">0% cubierto</span></div><div class="progress-bar"><div class="progress-fill pf-amber" style="width:0%"></div></div><div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--ink-soft);margin-top:0.3rem"><span>$0 cubierto</span><span>$95 total</span></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.25rem"><span style="font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:99px;background:var(--cream);color:var(--ink-soft);border:1px solid var(--border)">○ Colores Prismacolor</span><span style="font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:99px;background:var(--cream);color:var(--ink-soft);border:1px solid var(--border)">○ Uniforme</span><span style="font-size:0.68rem;color:var(--ink-soft)">+4 más</span></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center">Ver lista y apadrinar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PERFIL NIÑA -->
+<div id="screen-nina" class="screen">
+  <div style="max-width:680px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:2rem"><div class="section-label">Programa de Apadrinamiento</div><div style="font-size:4.5rem;margin:0.5rem 0">👧</div><div class="section-title">Sofía</div><div style="font-size:0.82rem;color:var(--ink-soft)">14 años · Programación</div><div style="font-size:0.9rem;color:var(--ink-mid);font-style:italic;margin-top:0.8rem;line-height:1.6">"Sofía sueña con ser programadora y crear apps para su comunidad. Le encanta la matemática y los videojuegos."</div></div>
+    <div class="card" style="background:linear-gradient(135deg,#F3EEFF,#FDFCFF);border-color:#D4B8F0;margin-bottom:1.2rem;text-align:center">
+      <div style="font-size:0.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;font-weight:700">Total de la lista</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--purple)">$14 <span style="font-size:1.2rem;color:var(--ink-soft)">/ $116</span></div>
+      <div class="progress-bar" style="margin:0.6rem 0"><div class="progress-fill pf-amber" style="width:11%"></div></div>
+      <div style="font-size:0.78rem;color:var(--amber);font-weight:700">11% cubierto — faltan $102</div>
+    </div>
+    <div class="card" style="margin-bottom:1.2rem">
+      <div class="card-title">Lista de útiles y uniforme</div><div class="card-sub">Selecciona los ítems que quieres apadrinar</div><hr class="divider">
+      <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.2rem">
+        <label style="display:flex;align-items:center;gap:0.8rem;padding:0.7rem 0.9rem;border-radius:10px;border:1px solid var(--border);cursor:pointer"><input type="checkbox" style="accent-color:var(--purple)"><div style="flex:1"><div style="font-size:0.85rem;font-weight:600">Cuadernos universitarios <span style="font-size:0.72rem;color:var(--ink-soft)">× 5</span></div></div><div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--purple)">$42.50</div></label>
+        <label style="display:flex;align-items:center;gap:0.8rem;padding:0.7rem 0.9rem;border-radius:10px;border:1px solid #86EFAC;background:var(--green-pale)"><span style="font-size:1.1rem">✅</span><div style="flex:1"><div style="font-size:0.85rem;color:var(--ink-soft)">Lápices y bolígrafos</div><div style="font-size:0.7rem;color:var(--green)">Apadrinado por María Torres</div></div><div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--ink-soft)">$3.00</div></label>
+        <label style="display:flex;align-items:center;gap:0.8rem;padding:0.7rem 0.9rem;border-radius:10px;border:1px solid var(--border);cursor:pointer"><input type="checkbox" style="accent-color:var(--purple)"><div style="flex:1"><div style="font-size:0.85rem;font-weight:600">Mochila escolar</div></div><div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--purple)">$25.00</div></label>
+        <label style="display:flex;align-items:center;gap:0.8rem;padding:0.7rem 0.9rem;border-radius:10px;border:1px solid var(--border);cursor:pointer"><input type="checkbox" style="accent-color:var(--purple)"><div style="flex:1"><div style="font-size:0.85rem;font-weight:600">Uniforme completo</div></div><div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--purple)">$35.00</div></label>
+      </div>
+      <div class="info-box info-purple" style="margin-bottom:1rem">🛡️ Solo verás el <strong>nombre de pila y edad</strong>. Cumplimos con la LOPDP Ecuador 2021.</div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:0.65rem;font-size:0.95rem">Apadrinar ítems seleccionados 💜</button>
+    </div>
+    <div style="text-align:center"><button class="btn btn-outline" onclick="show('apadrinar')">← Ver otras niñas</button></div>
+  </div>
+</div>
+
+<!-- SALA SUPERVISADA -->
+<div id="screen-sala" class="screen">
+  <div class="row-between" style="margin-bottom:1.2rem">
+    <div><div class="section-label">Sesión en vivo</div><div class="section-title">Sala <em>supervisada</em></div></div>
+    <div style="display:flex;gap:0.5rem;align-items:center">
+      <div style="display:flex;align-items:center;gap:0.4rem;background:#FEE2E2;border:1px solid #FCA5A5;border-radius:99px;padding:0.3rem 0.9rem"><div style="width:8px;height:8px;border-radius:50%;background:#EF4444" class="pulse"></div><span style="font-size:0.75rem;font-weight:700;color:#B91C1C">EN VIVO</span></div>
+      <span class="badge badge-green">🔒 Cifrada</span>
+      <span class="badge badge-purple">Sesión #1</span>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <div class="sala-bg">
+        <div style="padding:0.6rem 1rem;background:#1A0A2E;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(196,181,253,0.15)"><div style="display:flex;align-items:center;gap:0.5rem"><div style="width:7px;height:7px;border-radius:50%;background:#EF4444" class="pulse"></div><span style="font-size:0.68rem;color:rgba(196,181,253,0.6);font-family:monospace">kuska.sala/1 · expira en 58:32</span></div><span style="font-size:0.65rem;color:rgba(255,255,255,0.3)">max 3 · no grabable</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;padding:0.8rem">
+          <div style="background:linear-gradient(145deg,#1E0A3C,#2D1B4E);border-radius:12px;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:center;min-height:110px;border:1px solid rgba(196,181,253,0.1);position:relative"><div style="font-size:2.2rem">👧</div><div style="font-size:0.72rem;color:rgba(255,255,255,0.7);margin-top:0.4rem;font-weight:600">Sofía</div><div style="font-size:0.62rem;color:rgba(255,255,255,0.35)">14 años</div><div style="position:absolute;bottom:0.5rem;left:0.5rem;background:rgba(0,0,0,0.5);border-radius:5px;padding:0.12rem 0.4rem;font-size:0.58rem;color:rgba(255,255,255,0.5)">Participante</div><div style="position:absolute;top:0.5rem;right:0.5rem;width:7px;height:7px;border-radius:50%;background:#22C55E"></div></div>
+          <div style="background:linear-gradient(145deg,#1E0A3C,#2D1B4E);border-radius:12px;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:center;min-height:110px;border:1px solid rgba(167,139,250,0.3);position:relative"><div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#A78BFA);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1rem">MA</div><div style="font-size:0.72rem;color:rgba(255,255,255,0.7);margin-top:0.4rem;font-weight:600">María Torres</div><div style="font-size:0.62rem;color:rgba(167,139,250,0.6)">✓ Verificada</div><div style="position:absolute;bottom:0.5rem;left:0.5rem;background:rgba(124,58,237,0.4);border-radius:5px;padding:0.12rem 0.4rem;font-size:0.58rem;color:#C4B5FD">Mentora</div><div style="position:absolute;top:0.5rem;right:0.5rem;width:7px;height:7px;border-radius:50%;background:#22C55E"></div></div>
+        </div>
+        <div style="margin:0 0.8rem;background:rgba(21,128,61,0.15);border:1px solid rgba(134,239,172,0.3);border-radius:10px;padding:0.5rem 0.9rem;display:flex;align-items:center;gap:0.6rem"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#16A34A,#4ADE80);display:flex;align-items:center;justify-content:center;color:white;font-size:0.6rem;font-weight:800;flex-shrink:0">S</div><div><div style="font-size:0.72rem;font-weight:700;color:#86EFAC">👁️ Supervisora presente — sesión activa</div><div style="font-size:0.6rem;color:rgba(255,255,255,0.4)">Si se desconecta, la sesión se pausa automáticamente</div></div></div>
+        <div style="margin:0.6rem 0.8rem;padding:0.5rem 0.9rem;background:rgba(196,181,253,0.08);border-radius:8px;border-left:3px solid #7C3AED"><span style="font-size:0.68rem;color:rgba(196,181,253,0.5)">Tema:</span><span style="font-size:0.75rem;color:rgba(255,255,255,0.7);margin-left:0.4rem;font-weight:600">Python — Variables</span></div>
+        <div style="padding:0.8rem;background:#1A0A2E;display:flex;align-items:center;justify-content:center;gap:0.6rem;border-top:1px solid rgba(196,181,253,0.1);margin-top:0.6rem">
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(124,58,237,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem">🎤</div>
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(124,58,237,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem">📷</div>
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(124,58,237,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem">💬</div>
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;font-size:1rem">🚨</div>
+          <div style="width:48px;height:48px;border-radius:50%;background:#DC2626;display:flex;align-items:center;justify-content:center;font-size:1.1rem">📞</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:0.85rem">Reglas de seguridad activas</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.3rem;margin-top:0.5rem">
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;padding:0.3rem 0.5rem;background:var(--green-pale);border-radius:6px"><span>Máx. 3 participantes</span><span style="color:var(--green);font-weight:700">✓</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;padding:0.3rem 0.5rem;background:var(--green-pale);border-radius:6px"><span>Pausa si tutor se va</span><span style="color:var(--green);font-weight:700">✓</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;padding:0.3rem 0.5rem;background:var(--green-pale);border-radius:6px"><span>Link único</span><span style="color:var(--green);font-weight:700">✓</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;padding:0.3rem 0.5rem;background:var(--green-pale);border-radius:6px"><span>Sin grabación</span><span style="color:var(--green);font-weight:700">✓</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;padding:0.3rem 0.5rem;background:var(--green-pale);border-radius:6px"><span>Máx. 60 min</span><span style="color:var(--green);font-weight:700">✓</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;padding:0.3rem 0.5rem;background:var(--green-pale);border-radius:6px"><span>Cifrado E2E</span><span style="color:var(--green);font-weight:700">✓</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <div class="card">
+        <div class="card-title">Datos visibles para la mentora</div><hr class="divider">
+        <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--cream-dark);font-size:0.79rem;color:var(--ink-mid)"><span>Nombre completo</span><span class="badge badge-red">🚫 Oculto</span></div>
+        <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--cream-dark);font-size:0.79rem;color:var(--ink-mid)"><span>Nombre de pila</span><span class="badge badge-green">✓ Visible</span></div>
+        <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--cream-dark);font-size:0.79rem;color:var(--ink-mid)"><span>Edad</span><span class="badge badge-green">✓ Visible</span></div>
+        <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--cream-dark);font-size:0.79rem;color:var(--ink-mid)"><span>Colegio / dirección</span><span class="badge badge-red">🚫 Oculto</span></div>
+        <div style="display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--cream-dark);font-size:0.79rem;color:var(--ink-mid)"><span>Datos financieros</span><span class="badge badge-red">🚫 Oculto</span></div>
+        <div style="display:flex;justify-content:space-between;padding:0.4rem 0;font-size:0.79rem;color:var(--ink-mid)"><span>Área de interés</span><span class="badge badge-green">✓ Visible</span></div>
+        <div class="info-box info-red" style="margin-top:0.8rem;font-size:0.75rem">🚨 Presiona 🚨 para cerrar la sala de inmediato y alertar al equipo Kuska.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Registro de auditoría</div><div class="card-sub">Log inmutable — guardado automáticamente</div>
+        <div style="display:flex;flex-direction:column;gap:0.4rem;margin-top:0.6rem">
+          <div style="padding:0.45rem 0.75rem;background:var(--green-pale);border-left:3px solid var(--green);border-radius:0 8px 8px 0;font-size:0.76rem;color:var(--green);font-weight:500">✅ Sala generada — link único activo</div>
+          <div style="padding:0.45rem 0.75rem;background:var(--cream);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;font-size:0.76rem;color:var(--purple);font-weight:500">🔑 Link expira en 90 minutos</div>
+          <div style="padding:0.45rem 0.75rem;background:var(--cream);border-left:3px solid var(--ink-soft);border-radius:0 8px 8px 0;font-size:0.76rem;color:var(--ink-mid);font-weight:500">✓ Mentora verificada con cédula</div>
+          <div style="padding:0.45rem 0.75rem;background:var(--cream);border-left:3px solid var(--ink-soft);border-radius:0 8px 8px 0;font-size:0.76rem;color:var(--ink-mid);font-weight:500">👁️ Supervisora conectada</div>
+        </div>
+      </div>
+      <div class="card" style="background:linear-gradient(135deg,#F3EEFF,#FDFCFF);border-color:#D4B8F0">
+        <div style="font-size:0.78rem;font-weight:700;color:var(--purple);margin-bottom:0.4rem">🛡️ Cumplimiento LOPDP Ecuador 2021</div>
+        <div style="font-size:0.73rem;color:var(--ink-soft);line-height:1.5">Esta sala cumple con la Ley Orgánica de Protección de Datos Personales del Ecuador y el Código de la Niñez y Adolescencia.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL EMPRESA -->
+<div id="screen-empresa" class="screen">
+  <div class="row-between" style="margin-bottom:1.8rem">
+    <div><div class="section-label">Panel Corporativo</div><div class="section-title">Impacto <em>RSE</em></div><div class="section-sub">Banco Pichincha · Métricas de impacto social 2026</div></div>
+    <button class="btn btn-primary">⬇️ Certificado RSE</button>
+  </div>
+  <div class="grid-4" style="margin-bottom:2rem">
+    <div class="stat-card"><div class="stat-number">$200</div><div class="stat-label">Total aportado</div></div>
+    <div class="stat-card"><div class="stat-number">2</div><div class="stat-label">Niñas apoyadas</div></div>
+    <div class="stat-card"><div class="stat-number">1</div><div class="stat-label">Fondos activos</div></div>
+    <div class="stat-card"><div class="stat-number">78%</div><div class="stat-label">Meta cubierta</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><div class="card-title">Historial de aportes</div><div class="card-sub">Trazabilidad completa</div><hr class="divider"><div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid var(--cream-dark);font-size:0.82rem"><div><div style="font-weight:700">Fondo Escolar 2026</div><div style="font-size:0.72rem;color:var(--ink-soft)">07 mar 2026 · RSE Corporativa</div></div><div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--purple)">$200</div></div><div style="margin-top:0.8rem"><div class="info-box info-green">🔒 Registro inmutable · Auditable en todo momento</div></div></div>
+    <div class="card"><div class="card-title">Impacto en niñas</div><div class="card-sub">Datos agregados — nunca información individual</div><hr class="divider"><div style="display:flex;flex-direction:column;gap:0.5rem"><div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:0.4rem 0;border-bottom:1px solid var(--cream-dark)"><span>Niñas beneficiadas</span><span style="font-weight:700">2</span></div><div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:0.4rem 0;border-bottom:1px solid var(--cream-dark)"><span>Útiles cubiertos</span><span style="font-weight:700">4 ítems</span></div><div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:0.4rem 0;border-bottom:1px solid var(--cream-dark)"><span>Provincias impactadas</span><span style="font-weight:700">Pichincha</span></div><div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:0.4rem 0"><span>Áreas de interés</span><span style="font-weight:700">Tech · Diseño</span></div></div><div class="info-box info-purple" style="margin-top:0.8rem">🛡️ Datos agregados únicamente. Ningún dato individual de menores es compartido.</div></div>
+  </div>
+</div>
+
+<footer>Kuska · SheShips 2026 · Ecuador 🇪🇨 · Juntas hacia el futuro</footer>
+
+<script>
+function show(name, btn) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab, .screen-btn').forEach(b => b.classList.remove('active'));
+  var el = document.getElementById('screen-' + name);
+  if (el) el.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>
