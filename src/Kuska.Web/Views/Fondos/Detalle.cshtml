@@ -1,0 +1,114 @@
+﻿@model Kuska.Core.Entities.Fondo
+@{
+    ViewData["Title"] = "Detalle del Fondo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row-between" style="margin-bottom:1.8rem">
+    <div>
+        <div class="section-label">Módulo de Financiamiento</div>
+        <div class="section-title">@Model.Nombre</div>
+        <div class="section-sub">@Model.Escuela · @Model.Ciudad</div>
+    </div>
+    <div style="display:flex;gap:0.5rem;align-items:center">
+        <span class="badge @(Model.Estado == "Activo" ? "badge-green" : "badge-amber")">@Model.Estado</span>
+        <a asp-action="Index" class="btn btn-outline">← Volver</a>
+    </div>
+</div>
+
+<div class="grid-2">
+    <div style="display:flex;flex-direction:column;gap:1.2rem">
+
+        <!-- PROGRESO -->
+        <div class="card" style="background:linear-gradient(135deg,#F3EEFF,#FDFCFF);border-color:#D4B8F0">
+            <div style="font-size:0.68rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:0.3rem">Total acumulado</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:var(--purple);line-height:1">
+                $@Model.MontoActual.ToString("N0")
+            </div>
+            <div style="font-size:0.82rem;color:var(--ink-soft);margin-top:0.3rem">de $@Model.MetaMonto.ToString("N0") meta</div>
+            <div style="margin-top:0.8rem">
+                <div style="display:flex;justify-content:space-between;font-size:0.76rem;color:var(--ink-soft);font-weight:600;margin-bottom:0.3rem">
+                    <span>Progreso</span>
+                    <span style="color:var(--green)">@Model.PorcentajeAvance%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill green" style="width:@Model.PorcentajeAvance%"></div>
+                </div>
+            </div>
+            <hr class="divider">
+            <div style="font-size:0.76rem;color:var(--ink-soft)">
+                📅 Cierra el @Model.FechaFin.ToString("dd MMM yyyy")
+            </div>
+        </div>
+
+        <!-- HACER APORTE -->
+        <div class="card">
+            <div class="card-title">Hacer un aporte</div>
+            <div class="card-sub">Cada aporte queda registrado de forma transparente</div>
+            <form method="post" asp-controller="Fondos" asp-action="Aportar">
+                <input type="hidden" name="fondoId" value="@Model.FondoId" />
+                <div class="form-group">
+                    <label class="form-label">Monto ($)</label>
+                    <input class="form-control" type="number" name="monto"
+                           placeholder="Ej: 10.00" step="0.01" min="1" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tipo de aporte</label>
+                    <select class="form-control" name="fuente">
+                        <option value="Madre">Aporte personal</option>
+                        <option value="RSE">RSE Corporativa</option>
+                        <option value="Cooperacion">Cooperación Internacional</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Empresa (opcional)</label>
+                    <input class="form-control" type="text" name="empresa"
+                           placeholder="Nombre de la empresa si aplica" />
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.6rem">
+                    Aportar ahora 💜
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- HISTORIAL DE APORTES -->
+    <div class="card">
+        <div class="card-title">¿A dónde fue el dinero?</div>
+        <div class="card-sub">Cada centavo es rastreable — así de transparente somos</div>
+        <hr class="divider">
+        @if (!Model.Aportes.Any())
+        {
+            <div style="text-align:center;padding:2rem;color:var(--ink-soft);font-size:0.85rem">
+                Aún no hay aportes registrados
+            </div>
+        }
+        else
+        {
+            <div style="display:flex;flex-direction:column;gap:0">
+                @foreach (var aporte in Model.Aportes.OrderByDescending(a => a.FechaAporte))
+                {
+                    <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.65rem 0;border-bottom:1px solid var(--cream-dark)">
+                        <div style="width:9px;height:9px;border-radius:50%;margin-top:5px;flex-shrink:0;background:@(aporte.Fuente == "RSE" ? "var(--amber)" : aporte.Fuente == "Cooperacion" ? "var(--purple-soft)" : "var(--green)")"></div>
+                        <div style="flex:1">
+                            <div style="font-size:0.84rem;font-weight:700">
+                                @(aporte.Fuente == "RSE" ? $"Aporte RSE — {aporte.Empresa}" :
+                                                        aporte.Fuente == "Cooperacion" ? $"Cooperación — {aporte.Empresa ?? "Internacional"}" :
+                                                                            "Aporte de mamá")
+                            </div>
+                            <div style="font-size:0.72rem;color:var(--ink-soft)">
+                                @aporte.FechaAporte.ToString("dd MMM yyyy · HH:mm")
+                            </div>
+                        </div>
+                        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--purple)">
+                            $@aporte.Monto.ToString("N0")
+                        </div>
+                    </div>
+                }
+            </div>
+            <div style="margin-top:0.8rem">
+                <div class="secure-chip">🔒 Registro inmutable · Solo visible por auditoría</div>
+            </div>
+        }
+    </div>
+</div>

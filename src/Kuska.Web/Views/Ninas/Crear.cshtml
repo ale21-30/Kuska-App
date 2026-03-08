@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Registrar niña";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="max-width:520px;margin:0 auto">
+    <div style="margin-bottom:1.8rem">
+        <div class="section-label">Mi familia</div>
+        <div class="section-title">Registrar a mi <em>hija</em></div>
+        <div class="section-sub">Sus datos están protegidos — solo tú puedes verlos 🔒</div>
+    </div>
+
+    <div class="card">
+        <form method="post" asp-controller="Ninas" asp-action="Crear">
+            <div class="form-group">
+                <label class="form-label">Nombre de pila</label>
+                <input class="form-control" type="text" name="nombrePila"
+                       placeholder="Solo el nombre de pila — sin apellidos" required />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Edad</label>
+                <input class="form-control" type="number" name="edad"
+                       min="8" max="17" placeholder="Entre 8 y 17 años" required />
+            </div>
+            <div class="form-group">
+                <label class="form-label">¿Qué le interesa aprender?</label>
+                <select class="form-control" name="areaInteres">
+                    <option value="">Selecciona...</option>
+                    <option>Programación</option>
+                    <option>Diseño UX/UI</option>
+                    <option>Data Science / IA</option>
+                    <option>Ciberseguridad</option>
+                    <option>Robótica</option>
+                </select>
+            </div>
+            <div class="info-box info-purple" style="margin-bottom:1rem">
+                🛡️ Solo guardamos el <strong>nombre de pila y la edad</strong>. Nunca apellidos, dirección ni datos del colegio. Cumplimos con la LOPDP Ecuador 2021.
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.6rem">
+                Registrar a mi hija ✨
+            </button>
+        </form>
+    </div>
+</div>
